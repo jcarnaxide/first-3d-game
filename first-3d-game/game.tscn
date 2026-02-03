@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://1ysqwiiwhhgv" path="res://player/player.tscn" id="1_80nbo"]
 [ext_resource type="Material" uid="uid://dwpa81svtj38k" path="res://level/platform.tres" id="2_feb5d"]
 [ext_resource type="Material" uid="uid://b58aoy53foiwg" path="res://level/bridge.tres" id="3_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://dtbfitkqhx2om" path="res://mob/mob.tscn" id="4_fc0e3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_feb5d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -100,3 +101,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -7.5)
 use_collision = true
 size = Vector3(4, 1, 5)
 material = ExtResource("3_fc0e3")
+
+[node name="Mob" parent="." unique_id=815472321 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -7)

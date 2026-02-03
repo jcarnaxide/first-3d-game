@@ -1,10 +1,64 @@
 [gd_scene format=3 uid="uid://cmolmieefdl7x"]
 
 [ext_resource type="PackedScene" uid="uid://b3w2vp0dbsfa4" path="res://mob/bat/bat_model.glb" id="1_12yrx"]
+[ext_resource type="Script" uid="uid://cg5xg6p04p2db" path="res://mob/bat/bat_model.gd" id="2_vgr6s"]
+
+[sub_resource type="Animation" id="Animation_vgr6s"]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/bat:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1.3, 1.3), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/bat:surface_material_override/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.8645771, 0, 0.09053027, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_shx3p"]
+_data = {
+&"hurt": SubResource("Animation_vgr6s")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_030dj"]
+animation = &"custom/hurt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_scfiv"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_vgr6s"]
+mix_mode = 1
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_qf8hm"]
+graph_offset = Vector2(-197.51729, 142.92494)
+nodes/output/position = Vector2(464, 208)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_scfiv")
+nodes/Idle/position = Vector2(-16, 80)
+nodes/Hurt/node = SubResource("AnimationNodeAnimation_030dj")
+nodes/Hurt/position = Vector2(-16, 304)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_vgr6s")
+nodes/OneShot/position = Vector2(240, 160)
+node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"Idle", &"OneShot", 1, &"Hurt"]
 
 [node name="bat_model" unique_id=2122088164 instance=ExtResource("1_12yrx")]
+script = ExtResource("2_vgr6s")
 
-[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(328750650) index="0" unique_id=1033614117]
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(1434504069) index="0" unique_id=776803762]
 bones/0/position = Vector3(0, -0.007400004, 0)
 bones/1/rotation = Quaternion(-0.028654926, 0.18848532, -0.6867176, 0.7014778)
 bones/2/rotation = Quaternion(-0.056015443, -0.016041048, 0.27483782, 0.9597235)
@@ -19,5 +73,15 @@ bones/10/position = Vector3(-0.1309921, -0.22739176, -0.087851465)
 bones/10/rotation = Quaternion(0.26196837, -0.083455116, -0.26575127, 0.9240044)
 bones/11/rotation = Quaternion(2.5423756e-08, 0.69088244, 0.72296715, 3.637758e-08)
 
-[node name="AnimationPlayer" parent="." index="1" unique_id=212386329]
+[node name="AnimationPlayer" parent="." index="1" unique_id=1886196374]
+libraries/custom = SubResource("AnimationLibrary_shx3p")
 autoplay = &"Idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2" unique_id=2128825237]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
+tree_root = SubResource("AnimationNodeBlendTree_qf8hm")
+anim_player = NodePath("../AnimationPlayer")
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0

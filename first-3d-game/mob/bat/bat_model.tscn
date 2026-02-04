@@ -172,7 +172,6 @@ animation = &"hurt"
 animation = &"Idle"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_scfiv"]
-graph_offset = Vector2(-278.26163, 28.418346)
 nodes/output/position = Vector2(432, 112)
 nodes/idle/node = SubResource("AnimationNodeAnimation_shx3p")
 nodes/idle/position = Vector2(41.233887, 94.8)
@@ -209,6 +208,7 @@ autoplay = &"Idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2" unique_id=212646810]
 unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeBlendTree_scfiv")
 anim_player = NodePath("../AnimationPlayer")
 parameters/OneShot/active = false

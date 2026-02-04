@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b6xxr5tn5hbpe"]
+
+[ext_resource type="PackedScene" uid="uid://bw2m6rpraye2r" path="res://mob/spawner/spawner_model.glb" id="1_l1cud"]
+[ext_resource type="Shader" uid="uid://cfnwyva3u4qeb" path="res://mob/spawner/spawner_halo.gdshader" id="2_bk78j"]
+[ext_resource type="Material" uid="uid://bh1ego7bi1olb" path="res://mob/spawner/spawner_screen_material.tres" id="3_bk78j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lvlhh"]
+render_priority = 0
+shader = ExtResource("2_bk78j")
+shader_parameter/color = Color(0, 0.46141124, 0.33471984, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvlhh"]
+albedo_color = Color(1, 0.34901962, 1, 1)
+metallic = 0.55
+roughness = 0.33
+rim_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bk78j"]
+albedo_color = Color(0.525894, 0.52589405, 0.525894, 1)
+metallic = 0.48
+roughness = 0.36
+rim_enabled = true
+
+[node name="spawner_model" unique_id=1214836985 instance=ExtResource("1_l1cud")]
+
+[node name="halo" parent="." index="0" unique_id=508520665]
+material_override = SubResource("ShaderMaterial_lvlhh")
+
+[node name="Body" parent="." index="1" unique_id=1324948330]
+surface_material_override/0 = SubResource("StandardMaterial3D_lvlhh")
+surface_material_override/1 = ExtResource("3_bk78j")
+
+[node name="Top" parent="." index="2" unique_id=758134399]
+material_override = SubResource("StandardMaterial3D_bk78j")

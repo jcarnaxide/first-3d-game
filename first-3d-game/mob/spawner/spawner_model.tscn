@@ -16,10 +16,47 @@ roughness = 0.33
 rim_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bk78j"]
-albedo_color = Color(0.525894, 0.52589405, 0.525894, 1)
-metallic = 0.48
-roughness = 0.36
+albedo_color = Color(0.82264227, 0.8226428, 0.82264256, 1)
+metallic = 1.0
+roughness = 0.0
 rim_enabled = true
+
+[sub_resource type="Animation" id="Animation_bk78j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lvlhh"]
+resource_name = "rotation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p6j4b"]
+_data = {
+&"RESET": SubResource("Animation_bk78j"),
+&"rotation": SubResource("Animation_lvlhh")
+}
 
 [node name="spawner_model" unique_id=1214836985 instance=ExtResource("1_l1cud")]
 
@@ -31,4 +68,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_lvlhh")
 surface_material_override/1 = ExtResource("3_bk78j")
 
 [node name="Top" parent="." index="2" unique_id=758134399]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0.78395706, 0)
 material_override = SubResource("StandardMaterial3D_bk78j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3" unique_id=852343731]
+libraries/ = SubResource("AnimationLibrary_p6j4b")
+autoplay = &"rotation"

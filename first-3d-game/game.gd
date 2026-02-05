@@ -1,12 +1,23 @@
 extends Node3D
 
 var player_score = 0
-@onready var label = %Label
+var remaining_time = 30
+
+@onready var score = %Score
+@onready var remaining_time_label = %RemainingTime
 
 
 func increase_score():
 	player_score += 1
-	label.text = "Score: %s" % player_score
+	score.text = "Score: %s" % player_score
+
+
+func update_remaining_time():
+	remaining_time -= 1
+	remaining_time_label.text = "Time Left: %s" % remaining_time
+	
+	if remaining_time == 0:
+		get_tree().paused = true
 
 
 func do_poof(mob_global_position):
@@ -24,3 +35,7 @@ func _on_mob_spawner_3d_mob_spawned(mob):
 
 func _on_area_3d_body_entered(body):
 	get_tree().reload_current_scene.call_deferred()
+
+
+func _on_timer_timeout():
+	pass # Replace with function body.

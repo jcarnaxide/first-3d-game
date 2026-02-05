@@ -5,6 +5,7 @@
 [ext_resource type="Material" uid="uid://dwpa81svtj38k" path="res://level/platform.tres" id="2_feb5d"]
 [ext_resource type="Material" uid="uid://b58aoy53foiwg" path="res://level/bridge.tres" id="3_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://ce0p7i3p5x4gc" path="res://mob/spawner/mob_spawner_3d.tscn" id="4_fc0e3"]
+[ext_resource type="LabelSettings" uid="uid://dqkov36ekhm1y" path="res://hud_label_settings.tres" id="6_ryrav"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_feb5d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -25,11 +26,6 @@ fog_enabled = true
 fog_light_color = Color(0.23194602, 0.4992339, 0.74358267, 1)
 fog_height = -0.4
 fog_height_density = 0.35
-
-[sub_resource type="LabelSettings" id="LabelSettings_fc0e3"]
-font_size = 56
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7jktm"]
 
@@ -122,14 +118,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.682014, 0, -24.244324)
 [node name="MobSpawner3D3" parent="." unique_id=2067237696 instance=ExtResource("4_fc0e3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.69964, 0, -4.9723434)
 
-[node name="Label" type="Label" parent="." unique_id=969325164]
+[node name="HUD" type="Control" parent="." unique_id=1002076416]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Score" type="Label" parent="HUD" unique_id=969325164]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 55.0
 offset_top = 55.0
 offset_right = 267.0
 offset_bottom = 132.0
 text = "Score: 0"
-label_settings = SubResource("LabelSettings_fc0e3")
+label_settings = ExtResource("6_ryrav")
+
+[node name="RemainingTime" type="Label" parent="HUD" unique_id=1740568403]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -173.5
+offset_top = 55.0
+offset_right = 173.5
+offset_bottom = 132.0
+grow_horizontal = 2
+text = "Time Left: 30"
+label_settings = ExtResource("6_ryrav")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1910478545]
 collision_layer = 0
@@ -138,7 +157,11 @@ collision_layer = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8049114, 0)
 shape = SubResource("WorldBoundaryShape3D_7jktm")
 
+[node name="Timer" type="Timer" parent="." unique_id=1869426481]
+autostart = true
+
 [connection signal="mob_spawned" from="MobSpawner3D" to="." method="_on_mob_spawner_3d_mob_spawned"]
 [connection signal="mob_spawned" from="MobSpawner3D2" to="." method="_on_mob_spawner_3d_mob_spawned"]
 [connection signal="mob_spawned" from="MobSpawner3D3" to="." method="_on_mob_spawner_3d_mob_spawned"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

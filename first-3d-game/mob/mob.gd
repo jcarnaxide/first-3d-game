@@ -1,5 +1,6 @@
 extends RigidBody3D
 
+signal health_depleted
 signal died
 
 var health = 3
@@ -7,6 +8,9 @@ var speed = randf_range(2.0, 4.0)
 
 @onready var bat_model = %bat_model
 @onready var timer = %Timer
+
+@onready var hurt_sound = %HurtSound
+@onready var die_sound = %DieSound
 
 @onready var player = get_node("/root/Game/Player")
 
@@ -23,8 +27,8 @@ func take_damage():
 		return
 	
 	bat_model.hurt()
-	
 	health -= 1
+	hurt_sound.play()
 	
 	if health == 0:
 		set_physics_process(false)
@@ -33,9 +37,10 @@ func take_damage():
 		var random_upward_force = Vector3.UP * randf_range(1.0, 5.0)
 		apply_central_impulse(direction * 10.0 + random_upward_force)
 		timer.start()
-		
-		died.emit()
+		die_sound.play()
+		health_depleted.emit()
 
 
 func _on_timer_timeout():
 	queue_free()
+	died.emit()

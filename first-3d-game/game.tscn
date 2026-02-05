@@ -31,6 +31,8 @@ font_size = 56
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7jktm"]
+
 [node name="Game" type="Node3D" unique_id=1459932343]
 script = ExtResource("1_7jktm")
 
@@ -114,6 +116,12 @@ material = ExtResource("3_fc0e3")
 [node name="MobSpawner3D" parent="." unique_id=21680981 instance=ExtResource("4_fc0e3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.272034)
 
+[node name="MobSpawner3D2" parent="." unique_id=1840975712 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.682014, 0, -24.244324)
+
+[node name="MobSpawner3D3" parent="." unique_id=2067237696 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.69964, 0, -4.9723434)
+
 [node name="Label" type="Label" parent="." unique_id=969325164]
 unique_name_in_owner = true
 offset_left = 55.0
@@ -123,4 +131,14 @@ offset_bottom = 132.0
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_fc0e3")
 
+[node name="Area3D" type="Area3D" parent="." unique_id=1910478545]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1808896462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8049114, 0)
+shape = SubResource("WorldBoundaryShape3D_7jktm")
+
 [connection signal="mob_spawned" from="MobSpawner3D" to="." method="_on_mob_spawner_3d_mob_spawned"]
+[connection signal="mob_spawned" from="MobSpawner3D2" to="." method="_on_mob_spawner_3d_mob_spawned"]
+[connection signal="mob_spawned" from="MobSpawner3D3" to="." method="_on_mob_spawner_3d_mob_spawned"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

@@ -42,6 +42,12 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("shoot") and %Timer.is_stopped():
 		shoot_bullet()
+	
+	%gun_model.global_transform = lerp(
+		%gun_model.global_transform,
+		%AimedGunPosition.global_transform if Input.is_action_pressed("aim") else %HipGunPosition.global_transform,
+		0.2
+	)
 
 
 func shoot_bullet():

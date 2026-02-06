@@ -154,7 +154,7 @@ label_settings = ExtResource("6_ryrav")
 [node name="PanelContainer" type="PanelContainer" parent="HUD" unique_id=1902706216]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(750, 500)
+custom_minimum_size = Vector2(1200, 500)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -184,15 +184,27 @@ layout_mode = 2
 size_flags_vertical = 2
 text = "You Survived!"
 label_settings = ExtResource("6_ryrav")
+horizontal_alignment = 1
 
-[node name="PlayAgainButton" type="Button" parent="HUD/PanelContainer/MarginContainer/VBoxContainer" unique_id=1008560955]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PanelContainer/MarginContainer/VBoxContainer" unique_id=506244025]
 process_mode = 3
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="PlayAgainButton" type="Button" parent="HUD/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1008560955]
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 56
 text = "Play Again?"
+
+[node name="QuitButton" type="Button" parent="HUD/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=770200120]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 56
+text = "Quit"
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1910478545]
 collision_layer = 0
@@ -207,6 +219,7 @@ autostart = true
 [connection signal="mob_spawned" from="MobSpawner3D" to="." method="_on_mob_spawner_3d_mob_spawned"]
 [connection signal="mob_spawned" from="MobSpawner3D2" to="." method="_on_mob_spawner_3d_mob_spawned"]
 [connection signal="mob_spawned" from="MobSpawner3D3" to="." method="_on_mob_spawner_3d_mob_spawned"]
-[connection signal="pressed" from="HUD/PanelContainer/MarginContainer/VBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="HUD/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="HUD/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

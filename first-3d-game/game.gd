@@ -55,3 +55,7 @@ func _on_timer_timeout():
 
 func _on_play_again_button_pressed():
 	restart()
+
+
+func _on_quit_button_pressed():
+	get_tree().quit()

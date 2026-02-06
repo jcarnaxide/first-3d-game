@@ -19,11 +19,20 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5341887, 0)
 
 [node name="gun_model" parent="Camera3D" unique_id=468996703 instance=ExtResource("1_oul6g")]
+unique_name_in_owner = true
 transform = Transform3D(-0.40706578, 2.0424312e-05, -0.021851655, -0.00042809712, 0.40756604, 0.008355791, 0.021847468, 0.0083667245, -0.40697998, 0.5678467, -0.2892704, -0.69817907)
 
 [node name="Marker3D" type="Marker3D" parent="Camera3D/gun_model" unique_id=254810624]
 unique_name_in_owner = true
 transform = Transform3D(1.0000002, 0, 3.7252903e-09, 0, 1, 0, -3.7252903e-09, 0, 1.0000002, 0.004609823, 0.03066802, 0.54638195)
+
+[node name="HipGunPosition" type="Marker3D" parent="Camera3D" unique_id=1322285032]
+unique_name_in_owner = true
+transform = Transform3D(-0.40706578, 2.0424312e-05, -0.021851655, -0.00042809712, 0.40756604, 0.008355791, 0.021847468, 0.0083667245, -0.40697998, 0.5678467, -0.2892704, -0.69817907)
+
+[node name="AimedGunPosition" type="Marker3D" parent="Camera3D" unique_id=135091721]
+unique_name_in_owner = true
+transform = Transform3D(-0.40765178, 1.8359073e-16, -3.5638045e-08, -4.3974446e-10, 0.40762085, 0.00503009, 3.5635345e-08, 0.0050300825, -0.4076208, -0.005174756, -0.17211139, -0.5373821)
 
 [node name="Reticle" type="TextureRect" parent="." unique_id=349440254]
 anchors_preset = 8

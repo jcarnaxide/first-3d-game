@@ -19,7 +19,7 @@ func _unhandled_input(event):
 
 
 func _physics_process(delta):
-	const SPEED = 5.5
+	var speed = 8 if Input.is_action_pressed("sprint") else 5.5
 	
 	var input_direction_2D = Input.get_vector(
 		"move_left", "move_right", "move_forward", "move_back"
@@ -29,8 +29,8 @@ func _physics_process(delta):
 	)
 	var direction = transform.basis * input_direction_3D
 	
-	velocity.x = direction.x * SPEED
-	velocity.z = direction.z * SPEED
+	velocity.x = direction.x * speed
+	velocity.z = direction.z * speed
 	
 	velocity.y -= 20.0 * delta
 	if Input.is_action_just_pressed("jump") and is_on_floor():

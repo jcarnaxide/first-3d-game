@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+const MOUSE_SENSITIVITY = 0.5
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -7,8 +9,8 @@ func _ready():
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
-		rotation_degrees.y -= event.relative.x * 0.3
-		%Camera3D.rotation_degrees.x -= event.relative.y * 0.2
+		rotation_degrees.y -= event.relative.x * 0.3 * MOUSE_SENSITIVITY
+		%Camera3D.rotation_degrees.x -= event.relative.y * 0.2 * MOUSE_SENSITIVITY
 		%Camera3D.rotation_degrees.x = clamp(
 			%Camera3D.rotation_degrees.x, -60.0, 60.0
 		)

@@ -22,7 +22,7 @@ func increase_score():
 func decrement_time():
 	remaining_time -= 1
 	remaining_time_label.text = "Time Left: %s" % remaining_time
-	
+
 	if remaining_time == 0:
 		game_won()
 

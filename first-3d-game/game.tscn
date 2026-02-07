@@ -6,6 +6,8 @@
 [ext_resource type="Material" uid="uid://b58aoy53foiwg" path="res://level/bridge.tres" id="3_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://ce0p7i3p5x4gc" path="res://mob/spawner/mob_spawner_3d.tscn" id="4_fc0e3"]
 [ext_resource type="LabelSettings" uid="uid://dqkov36ekhm1y" path="res://hud_label_settings.tres" id="6_ryrav"]
+[ext_resource type="PackedScene" uid="uid://dmfay3jiv8gwk" path="res://ui/game_end_panel.tscn" id="7_eow3j"]
+[ext_resource type="PackedScene" uid="uid://dq4ycurdf66yh" path="res://ui/pause_menu.tscn" id="8_j5wjh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_feb5d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -151,66 +153,21 @@ grow_horizontal = 2
 text = "Time Left: 30"
 label_settings = ExtResource("6_ryrav")
 
-[node name="PanelContainer" type="PanelContainer" parent="HUD" unique_id=1902706216]
+[node name="GameEndPanel" parent="HUD" unique_id=1225983843 instance=ExtResource("7_eow3j")]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(1200, 500)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -183.0
-offset_top = -83.0
-offset_right = 183.0
-offset_bottom = 83.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD/PanelContainer" unique_id=2042343579]
-layout_mode = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PanelContainer/MarginContainer" unique_id=2144936178]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Winner" type="Label" parent="HUD/PanelContainer/MarginContainer/VBoxContainer" unique_id=731326029]
-layout_mode = 2
-size_flags_vertical = 2
-text = "You Survived!"
-label_settings = ExtResource("6_ryrav")
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PanelContainer/MarginContainer/VBoxContainer" unique_id=506244025]
-process_mode = 3
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="PlayAgainButton" type="Button" parent="HUD/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1008560955]
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 56
-text = "Play Again?"
-
-[node name="QuitButton" type="Button" parent="HUD/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=770200120]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 56
-text = "Quit"
+[node name="PauseMenu" parent="HUD" unique_id=1855610447 instance=ExtResource("8_j5wjh")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1910478545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
 collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1808896462]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8049114, 0)
 shape = SubResource("WorldBoundaryShape3D_7jktm")
 
 [node name="Timer" type="Timer" parent="." unique_id=1869426481]
@@ -219,7 +176,7 @@ autostart = true
 [connection signal="mob_spawned" from="MobSpawner3D" to="." method="_on_mob_spawner_3d_mob_spawned"]
 [connection signal="mob_spawned" from="MobSpawner3D2" to="." method="_on_mob_spawner_3d_mob_spawned"]
 [connection signal="mob_spawned" from="MobSpawner3D3" to="." method="_on_mob_spawner_3d_mob_spawned"]
-[connection signal="pressed" from="HUD/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
-[connection signal="pressed" from="HUD/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="play_again" from="HUD/GameEndPanel" to="." method="restart"]
+[connection signal="unpause" from="HUD/PauseMenu" to="." method="_on_pause_menu_unpause"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="decrement_time"]

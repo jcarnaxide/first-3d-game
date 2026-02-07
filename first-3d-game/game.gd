@@ -5,13 +5,22 @@ var remaining_time = 30
 
 @onready var score = %Score
 @onready var remaining_time_label = %RemainingTime
-@onready var panel_container = %PanelContainer
+@onready var game_end_panel = %GameEndPanel
+@onready var pause_menu = %PauseMenu
+
+
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		if not get_tree().paused:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			get_tree().paused = true
+			pause_menu.show()
 
 
 func game_won():
-	get_tree().paused = true
-	panel_container.show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().paused = true
+	game_end_panel.show()
 
 
 func increase_score():
@@ -49,13 +58,7 @@ func _on_area_3d_body_entered(body):
 	restart()
 
 
-func _on_timer_timeout():
-	decrement_time()
-
-
-func _on_play_again_button_pressed():
-	restart()
-
-
-func _on_quit_button_pressed():
-	get_tree().quit()
+func _on_pause_menu_unpause():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	get_tree().paused = false
+	pause_menu.hide()

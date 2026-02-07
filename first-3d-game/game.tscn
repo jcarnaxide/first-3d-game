@@ -29,6 +29,9 @@ fog_light_color = Color(0.23194602, 0.4992339, 0.74358267, 1)
 fog_height = -0.4
 fog_height_density = 0.35
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5wjh"]
+bg_color = Color(8.904189e-07, 0.63166684, 0.16355115, 1)
+
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7jktm"]
 
 [node name="Game" type="Node3D" unique_id=1459932343]
@@ -129,29 +132,56 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Score" type="Label" parent="HUD" unique_id=969325164]
+[node name="MarginContainer" type="MarginContainer" parent="HUD" unique_id=1244538893]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 81.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer" unique_id=1443878517]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="HUD/MarginContainer/HBoxContainer" unique_id=969325164]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 55.0
-offset_top = 55.0
-offset_right = 267.0
-offset_bottom = 132.0
+layout_mode = 2
+size_flags_horizontal = 2
 text = "Score: 0"
 label_settings = ExtResource("6_ryrav")
 
-[node name="RemainingTime" type="Label" parent="HUD" unique_id=1740568403]
+[node name="RemainingTime" type="Label" parent="HUD/MarginContainer/HBoxContainer" unique_id=1740568403]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -173.5
-offset_top = 55.0
-offset_right = 173.5
-offset_bottom = 132.0
-grow_horizontal = 2
+layout_mode = 2
+size_flags_horizontal = 6
 text = "Time Left: 30"
 label_settings = ExtResource("6_ryrav")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/HBoxContainer" unique_id=1945353010]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 15
+
+[node name="HPLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1936608955]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "HP:"
+label_settings = ExtResource("6_ryrav")
+
+[node name="HealthBar" type="ProgressBar" parent="HUD/MarginContainer/HBoxContainer/HBoxContainer" unique_id=787025617]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 77)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 56
+theme_override_styles/fill = SubResource("StyleBoxFlat_j5wjh")
+step = 1.0
+value = 50.0
+show_percentage = false
 
 [node name="GameEndPanel" parent="HUD" unique_id=1225983843 instance=ExtResource("7_eow3j")]
 unique_name_in_owner = true

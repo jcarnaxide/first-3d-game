@@ -2,6 +2,7 @@ extends Node3D
 
 var player_score = 0
 var remaining_time = 30
+var player_health = 100
 
 @onready var score = %Score
 @onready var remaining_time_label = %RemainingTime

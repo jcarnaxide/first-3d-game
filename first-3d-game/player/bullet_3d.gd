@@ -15,5 +15,5 @@ func _physics_process(delta):
 
 func _on_body_entered(body: Node3D) -> void:
 	queue_free()
-	if body.has_method("take_damage"):
+	if body.has_method("take_damage") and body.is_in_group("mob"):
 		body.take_damage()

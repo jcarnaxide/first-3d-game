@@ -18,9 +18,10 @@ func _unhandled_input(event):
 			pause_menu.show()
 
 
-func game_won():
+func game_end(won: bool):
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
+	game_end_panel.configure(won)
 	game_end_panel.show()
 
 
@@ -34,7 +35,7 @@ func decrement_time():
 	remaining_time_label.text = "Time Left: %s" % remaining_time
 
 	if remaining_time == 0:
-		game_won()
+		game_end(true)
 
 
 func do_poof(mob_global_position):
@@ -56,10 +57,14 @@ func _on_mob_spawner_3d_mob_spawned(mob):
 
 
 func _on_area_3d_body_entered(body):
-	restart()
+	game_end(false)
 
 
 func _on_pause_menu_unpause():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	get_tree().paused = false
 	pause_menu.hide()
+
+
+func _on_player_died():
+	game_end(false)

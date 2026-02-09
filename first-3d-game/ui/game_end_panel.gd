@@ -3,6 +3,11 @@ extends Control
 signal play_again
 
 
+func configure(won: bool = true):
+	%Winner.visible = won
+	%Loser.visible = !won
+
+
 func _on_play_again_pressed():
 	play_again.emit()
 

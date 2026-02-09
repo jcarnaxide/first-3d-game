@@ -8,7 +8,10 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_6jlfs"]
 radius = 0.35940084
 
-[node name="Mob" type="RigidBody3D" unique_id=815472321]
+[sub_resource type="SphereShape3D" id="SphereShape3D_mixeo"]
+radius = 0.43621615
+
+[node name="Mob" type="RigidBody3D" unique_id=815472321 groups=["mob"]]
 collision_layer = 2
 collision_mask = 3
 gravity_scale = 0.0
@@ -17,13 +20,8 @@ script = ExtResource("1_6jlfs")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1104682790]
 shape = SubResource("SphereShape3D_6jlfs")
 
-[node name="bat_model" parent="." unique_id=1540172869 instance=ExtResource("1_7b8ug")]
+[node name="bat_model" parent="." unique_id=1540172869 groups=["mob"] instance=ExtResource("1_7b8ug")]
 unique_name_in_owner = true
-
-[node name="Timer" type="Timer" parent="." unique_id=2017033058]
-unique_name_in_owner = true
-wait_time = 2.0
-one_shot = true
 
 [node name="HurtSound" type="AudioStreamPlayer3D" parent="." unique_id=1103648819]
 unique_name_in_owner = true
@@ -33,4 +31,21 @@ stream = ExtResource("3_mixeo")
 unique_name_in_owner = true
 stream = ExtResource("4_jkfaf")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Hitbox" type="Area3D" parent="." unique_id=814999429]
+unique_name_in_owner = true
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=78908705]
+shape = SubResource("SphereShape3D_mixeo")
+
+[node name="DeathTimer" type="Timer" parent="." unique_id=2017033058]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1480690493]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

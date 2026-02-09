@@ -1,6 +1,16 @@
 extends CharacterBody3D
 
+signal died
+
 const MOUSE_SENSITIVITY = 0.5
+const MAX_HEALTH = 50.0
+
+var health = MAX_HEALTH:
+	set(value):
+		if value <= 0.0:
+			died.emit()
+		health = value
+		%HealthBar.value = (value / MAX_HEALTH) * 100
 
 
 func _ready():
@@ -64,3 +74,7 @@ func shoot_bullet():
 
 	%Timer.start()
 	%AudioStreamPlayer.play()
+
+
+func take_damage():
+	health -= 1

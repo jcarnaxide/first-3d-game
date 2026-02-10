@@ -21,6 +21,8 @@ func _physics_process(delta):
 	direction.y = 0.0
 	linear_velocity = direction * speed
 	rotation.y = Vector3.FORWARD.signed_angle_to(direction, Vector3.UP) + PI
+	rotation.x = 0.0
+	rotation.z = 0.0
 	if can_attack:
 		for body in hitbox.get_overlapping_bodies():
 			if body.is_in_group("player") and body.has_method("take_damage"):

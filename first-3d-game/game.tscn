@@ -8,6 +8,7 @@
 [ext_resource type="LabelSettings" uid="uid://dqkov36ekhm1y" path="res://hud_label_settings.tres" id="6_ryrav"]
 [ext_resource type="PackedScene" uid="uid://dmfay3jiv8gwk" path="res://ui/game_end_panel.tscn" id="7_eow3j"]
 [ext_resource type="PackedScene" uid="uid://dq4ycurdf66yh" path="res://ui/pause_menu.tscn" id="8_j5wjh"]
+[ext_resource type="PackedScene" uid="uid://b4pe822o1pqwu" path="res://collectible/first_aid_collectible.tscn" id="9_vef74"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_feb5d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -170,6 +171,9 @@ shape = SubResource("WorldBoundaryShape3D_7jktm")
 
 [node name="Timer" type="Timer" parent="." unique_id=1869426481]
 autostart = true
+
+[node name="FirstAidCollectible" parent="." unique_id=1759937053 instance=ExtResource("9_vef74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0317235, 0, -3.7454958)
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="mob_spawned" from="MobSpawner3D" to="." method="_on_mob_spawner_3d_mob_spawned"]

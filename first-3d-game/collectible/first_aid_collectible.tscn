@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b4pe822o1pqwu"]
+
+[ext_resource type="PackedScene" uid="uid://ciy3sl0oyb3ya" path="res://collectible/first_aid_model.tscn" id="1_rpxx8"]
+[ext_resource type="Script" uid="uid://c7i1882sq5byr" path="res://collectible/first_aid_collectible.gd" id="1_rtgck"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rpxx8"]
+
+[node name="FirstAidCollectible" type="Area3D" unique_id=1759937053]
+collision_layer = 0
+script = ExtResource("1_rtgck")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1501223695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0459049, 0)
+shape = SubResource("SphereShape3D_rpxx8")
+
+[node name="FirstAidModel" parent="." unique_id=1464731028 instance=ExtResource("1_rpxx8")]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 1.0612392, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

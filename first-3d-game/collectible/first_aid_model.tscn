@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ciy3sl0oyb3ya"]
+
+[ext_resource type="PackedScene" uid="uid://kwuv7nggyqo5" path="res://collectible/MadeByJawns_ItchIO_GameItems_v1_0_1_FirstAid.glb" id="1_pap33"]
+
+[node name="FirstAidModel" unique_id=1464731028 instance=ExtResource("1_pap33")]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
